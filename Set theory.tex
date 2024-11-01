@@ -1,0 +1,429 @@
+\documentclass[10pt, a4paper]{article}
+\usepackage[a4paper, portrait, margin=1in]{geometry}
+%\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage[english, bulgarian]{babel}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{array}
+\usepackage{hyperref}
+\usepackage{calrsfs}
+\usepackage{mathtools}
+\usepackage[normalem]{ulem}
+\usepackage{tikz}
+\usepackage[table]{xcolor}
+\usepackage{xcolor}
+\usepackage{array}
+
+\newtheorem{theorem}{Теорема}[section]
+\newtheorem{corollary}{Следствие}[theorem]
+\newtheorem{lemma}[theorem]{Лема}
+\theoremstyle{definition}
+\newtheorem{definition}{Дефиниция}[section]
+\newtheorem{problem}{Задача}
+\newtheorem{prop}{Свойствo}[section]
+\newtheorem*{implication}{Малко повече за (би)импликацията}
+\theoremstyle{remark}
+\newtheorem*{remark}{Забележка}
+\newtheorem*{tip}{Полезно}
+\newtheorem*{sol}{Решение}
+
+
+
+\title{2. Множества}
+\author{''Множество множества''}
+\date{Октомври 2024}
+
+
+%\newcommand{\strikeRow}[3]{% A custom command to strike through an entire row
+    %\makebox[0pt][l]{\rule[-0.4ex]{\dimexpr\linewidth+2\fboxsep\relax}{0.5pt}}#1 %& 
+    %\makebox[0pt][l]{\rule[-0.4ex]{\dimexpr\linewidth+2\fboxsep\relax}{0.5pt}}#2 & 
+    %\makebox[0pt][l]{\rule[-0.4ex]{\dimexpr\linewidth+2\fboxsep\relax}{0.5pt}}#3
+%}
+\begin{document}
+\maketitle
+\section{Основни задачи}
+
+
+\newcommand{\strikeRow}[1]{
+    \multicolumn{3}{|c|}{
+        \tikz[baseline]{
+            \node[inner sep=0pt, outer sep=0pt] (A) {#1};
+            \draw[thick] (A.south west) -- (A.north east);
+        }
+    }
+}
+
+
+
+\begin{definition}[операции върху множества]\hfill
+    \begin{itemize}
+        \item \(A\cup B\coloneq\{a\;|\;a\in A\vee a\in B\}\) /обединение/,  
+        \item \(A\cap B\coloneq\{a\;|\;a\in A\wedge a\in B\}\) /сечение/,  
+        \item \(A\backslash B\coloneq\{a\;|\;a\in A \wedge a\notin B\}\) /разлика/,
+        \item \(A\triangle B\coloneq\{a\;|\;a\in A\oplus\ a\in B\}\) /симетрична разлика/,
+        \item \(A\times B\coloneq\{(a,b)\;|\;a\in A\wedge b\in B\}\) /декартово произведение/,  
+        \item \(\overline{A^U}=A^{\complement}\coloneq\{a\;|\;a\notin A \wedge a\in U\}\) /допълнение/, където \(U\;(A\subseteq U)\) е някакъв универсум.
+    \end{itemize}
+    \begin{remark}
+        Най-голям универсум няма! (помислете защо)
+    \end{remark}
+\end{definition}
+
+\hfill
+\begin{prop}[Свойства на операциите върху множества]\hfill
+    \begin{itemize}
+        \item асоциативност на обединението, сечението, сим. разлика: \(A\cup B\cup C= A\cup (B\cup C)\), \(A\cap B\cap C= A\cap (B\cap C)\), \(A\triangle B\triangle C= A\triangle (B\triangle C)\)
+        \item комутативност на обединението, сечението, сим. разлика:\(A\cup B=B\cup A\), \(A\cap B=B\cap A\), \(A\triangle B=B\triangle A\)
+        \item *De Morgan: \(\overline{A\cup B}=\overline{A}\cap \overline{B},
+        \;\overline{A\cap B}=\overline{A}\cup \overline{B}\)
+        \item дистрибутивен закон: \(A\cup(B\cap C)=(A\cup B)\cap(A\cup C),\; A\cap(B\cup C)=(A\cap B)\cup(A\cap C),\; A\times (B\cup C)=(A\times B)\cup(A\times C)\)
+        \item свойства на празното множество и универсума: \(A\cup\varnothing=A,\; A\cap\varnothing=\varnothing,\; A\cup U=U,\; A\cap U=A\)
+        \item двойно допълнение: \(\overline{\overline{A}}=A\)
+        \item поглъщане (absorption): \(A\cup(A\cap B)=A,\;A\cap(A\cup B)=A\)
+        \item *други полезни: \(A\backslash B=A\cap\overline{B}\)
+    \end{itemize}
+    \begin{tip}
+        Забележете, че операциите върху множества (без декартовото) доста напомнят логическите (което не е изненадващо, ако се загледаме в дефинициите им по-горе). Обединението е аналог на дизюнкцията, сечението на конюнкцията, допълнението на негацията, симетричната разлика на изключващото или.\\\emph{Въпрос:} Кое тогава ''отговаря'' на импликацията?
+        \\Всъщност релацията ''подмножество'' носи подбна информация. По-ясно това става от връзката: \(B\subseteq A\) тстк \(\forall a[(a\in B)\rightarrow (a\in A)]\).
+    \end{tip}
+\end{prop}
+
+\hfill
+\begin{prop}
+    Подобно на таблиците на истинност при логиката, тук отново можем да правим таблици на включване, вместо T и F обаче стойностите са 1 (елементът е част от множеството) и 0 (не е част от него).
+\end{prop}
+
+\begin{flushleft}
+    \emph{Малко за парадока са Ръсел}: Използваме ''множество'' като базово понятие, което не дефинираме. Идва обаче въпросът всичко ли може да бъде множество (или по-конкретно всяко нещо, което може да се дефинира като колекция, ли е множество). Известно време се е считало, че може. Оказва се обаче, че такова безраборно ползване на понятието довежда до неконситентност, парадокси. Ето пример с такъв:\\
+    \emph{Парадокс на Ръсел}: Нека $R=\{x\;|\;x\notin x\}$, тогава за произволно множество $y$: $y\in R$ тстк $y\notin y$, замествайки $y=R$:
+     $R\in R \Leftrightarrow R\notin R$, което е виден парадокс. Проблемът тук не е във възможността множество да бъде елемент на себе си, а конкретно в считането на R за множество.\\
+    За да се избегнат такива противоречия, са установени различни аксиоматични системи, които регулират кое е валидно множество (съответно в тях R не е такова).    
+\end{flushleft}
+
+\hfill
+\begin{problem}
+    Кои от следните са верни?
+    
+    \begin{minipage}[t]{0.25\textwidth}
+        а) $a\in\{\{a\},b\}$
+    \end{minipage}
+    \begin{minipage}[t]{0.25\textwidth}
+        б) $a\subseteq\{a,b\}$
+    \end{minipage}
+    \begin{minipage}[t]{0.25\textwidth}
+        в) $a\subseteq\{a,\{a\}\}$
+    \end{minipage}
+    \begin{minipage}[t]{0.25\textwidth}
+        г) $\{a\}\in\{b,c,a\}$
+    \end{minipage}
+    \vspace{0.1cm}
+    
+    \begin{minipage}[t]{0.25\textwidth}
+        д) $\{a\}\in\{b,\{a,b\},a\}$
+    \end{minipage}
+    \begin{minipage}[t]{0.25\textwidth}
+        е) $\{a,b\}\subseteq\{a,c,\{a,b\}\}$
+    \end{minipage}
+    \begin{minipage}[t]{0.25\textwidth}
+        ж) $\{a,b\}\subseteq\{a,\{a,b\},b\}$
+    \end{minipage}
+    \begin{minipage}[t]{0.25\textwidth}
+        з) $\{a,b\}\in\{a,\{a,b\},b\}$
+    \end{minipage}
+    \vspace{0.1cm}
+    
+    \begin{minipage}[t]{0.25\textwidth}
+        и) $\{\{a,b\}\}\in\{a,\{a,b\},b\}$
+    \end{minipage}
+    \begin{minipage}[t]{0.25\textwidth}
+        й) $\{\{a,b\}\}\subseteq\{a,b,\{a,b\}\}$
+    \end{minipage}
+    \begin{minipage}[t]{0.25\textwidth}
+        к) $\{a,b\}\in\{a,b\}$
+    \end{minipage}
+    \begin{minipage}[t]{0.25\textwidth}
+        л) $\varnothing\in\{a,b\}$
+    \end{minipage}
+    \vspace{0.1cm}
+    
+    \begin{minipage}[t]{0.25\textwidth}
+        м) $\varnothing\in\{a,\varnothing\}$
+    \end{minipage}
+    \begin{minipage}[t]{0.25\textwidth}
+        н) $\varnothing\in\varnothing$
+    \end{minipage}
+    \begin{minipage}[t]{0.25\textwidth}
+        о) $\varnothing\subseteq\{a,b\}$
+    \end{minipage}
+    \begin{minipage}[t]{0.25\textwidth}
+        п) $\{\varnothing\}\subseteq\{a,\varnothing\}$
+    \end{minipage}
+    \vspace{0.1cm}
+    
+    \begin{minipage}[t]{0.25\textwidth}
+        р) $\{\varnothing\}\subseteq\{a\}$
+    \end{minipage}
+    \begin{minipage}[t]{0.25\textwidth}
+        с) $\varnothing\in\{a,b\}$
+    \end{minipage}
+    \begin{minipage}[t]{0.25\textwidth}
+        т) $\{\varnothing\}\in\{a,\varnothing\}$
+    \end{minipage}
+    \begin{minipage}[t]{0.25\textwidth}
+        у) $a\in\mathcal{P}(\{a,b\})$
+    \end{minipage}
+\end{problem}
+\hfill
+\begin{sol}
+    Не, не, не, не, не, не, да, да, не, да, не, не, да, не, да, да, не, не, не, не; $\blacksquare$
+\end{sol}
+
+\hfill
+\begin{problem}
+    Нека А е множество. Вярно ли е, че ако \(|\mathcal{P}(A)|=0\), то \(A=\varnothing\)
+\end{problem}
+\begin{sol}
+    Ако сте се сетили, поздравления, Вие сте \emph{майстор на математическата логика}. Отговорът е ДА; всъщност степенното множество никога не е празно (все пак \(\varnothing\) е подмножество на всяко друго), но цялото твърдение е вярно, защото това е (леко скрита) импликация с антецедент F \(:\backslash\) \(\blacksquare\) 
+\end{sol}
+
+\hfill
+\begin{problem}
+    Съществува ли множество А, за което \(A\cap\mathcal{P}(A^2)\neq\varnothing\)? Ако не, обосновете защо, ако да, дайте поне два примера.
+\end{problem}
+\begin{sol}
+    Съществува, ето две възможни:
+    \begin{itemize}
+        \item \(A=\{\varnothing, ...\}\), понеже \(\varnothing\) е подмножество на всяко друго, то \(\varnothing\in A\cap\mathcal{P}(A^2)\)
+        \item \(A=\{a, b, \{(a,b)\}\}=\{a, b, \{\{\{a\},\{a,b\}\}\}\}\), тогава \((a,b)\in A^2\), окъдето \(\{(a,b)\}\in\mathcal{P}(A)\) \(\blacksquare\)
+    \end{itemize}
+\end{sol}
+
+\hfill
+\begin{problem}
+    За множества $A, B$ да се докаже, че \(A\backslash B=A\cap\overline{B}\).
+\end{problem}
+\begin{sol}
+    $x\in A\backslash B\equiv (x\in A) \wedge (x\notin B) \equiv (x\in A)\wedge (x\in \overline{B})\equiv x\in(A\cup \overline{B})\quad\blacksquare$
+\end{sol}
+
+\hfill
+\begin{problem}
+    Ако $A, B, C$ са множества, да се докаже, че $(A\backslash C)\cup(B\backslash C)=(A\cup B)\backslash C$
+\end{problem}
+\begin{sol}
+    $(A\backslash C)\cup(B\backslash C)=(A\cap\overline{C})\cup(B\cap\overline C)=(A\cup B)\cap\overline{C}=(A\cup B)\backslash C\quad\blacksquare$
+\end{sol}
+
+\hfill
+\begin{problem}
+    Да се докаже, че \(A\cap B\subseteq A\cup B\).
+\end{problem}
+\begin{sol}
+    Ето 3 възможни решения:\\
+    \\\emph{1 н.)} С таблица:
+    \begin{tabular}{ |c|c|c|c| }
+        \hline А & B & $A\cap B$ & $A\cup B$\\
+        \hline 0 & 0 & 0 & 0\\
+        \hline 0 & 1 & 0 & 1\\
+        \hline 1 & 0 & 0 & 1\\
+        \hline 1 & 1 & 1 & 1\\
+        \hline
+    \end{tabular}
+    \\От нея се вижда, че винаги когато елемент принадлежи на $A\cap B$, то той принадлежи и на $A\cup B$, т.е. \(\forall x: (x\in A\cap B)\rightarrow(x\in A\cup B)\), откъдето $A\cap B\in A\cup B.\quad\blacksquare$\\
+    \\\emph{2 н.)} Достатъчно е да докажем, че \(\forall x: (x\in A\cap B)\rightarrow(x\in A\cup B)\), т.е. $(x\in A\cap B)\rightarrow(x\in A\cup B)$ е тавтология. За начало нека за конкретен $x$, $p$ е съждението $x\in A$, а $q$ е съждението $x\in B$:\\
+    $(x\in A\cap B)\rightarrow(x\in A\cup B) \equiv\\ (x\in A \wedge x\in B)\rightarrow (x\in A \vee x\in B)\equiv\\ (p\wedge q)\rightarrow (p\vee q)\equiv\\ \neg(p\wedge q)\vee(p\vee q)\equiv \\ \neg p\vee \neg q \vee p\vee q \equiv T\quad\blacksquare$\\
+    \\\emph{3 н.)}  Може да докажем и че е валиден изводът: \(x\in A\cap B\over \therefore\;x\in A\cup B\), или \(p\wedge q\over\therefore\;p\vee q\):
+    \[p\wedge q\overset{\mathrm{\textup{правило за опростяване}}}{\vdash} p\overset{\mathrm{\textup{правило за добавяне}}}{\vdash} p\vee q\quad\blacksquare\]
+\end{sol}
+
+\hfill
+\begin{problem}
+    Да се докаже, че \(A\times (B\cup C)=(A\times B)\cup(A\times C)\).
+\end{problem}
+\begin{sol}
+    Ако пробваме да решим с таблица, възниква проблем с декартовото произведение - то борави с наредени двойки, което не се вписва в таблицата.\\
+    Решаваме с еквивалентни преобразувания: За произволна наредена двойка $z$:\\ \(z=(z_1,z_2)\in A\times(B\cup C) \equiv (z_1\in A) \wedge (z_2\in B\cup C)\equiv (z_1\in A) \wedge ((z_2\in B) \vee (z_2\in C)) \overset{\mathrm{\textup{дистрибутвиност}}}{\equiv} [(z_1\in A) \wedge (z_2\in B)] \vee [(z_1\in A) \wedge (z_2\in C)] \equiv [z\in A\times B]\vee [z\in A\times C]\equiv z\in(A\times B)\cup(A\times C)\)\\Тоест произволен елемент приндлежи на лявата страна от условието точно когато приндлежи и на дясната, т.е. двете съвпадат.\(\quad\blacksquare\)
+\end{sol}
+
+\hfill
+\begin{problem}
+    Да се докаже, че \(B\subseteq C\), то \(B\backslash C=\varnothing\).
+\end{problem}
+
+\begin{sol}
+    Ще демонстрираме 3 възможни решения:\\
+    \\\emph{1 н.)} С таблица:
+    \begin{tabular}{ |c|c|c| }
+        \hline B & C & $B\backslash C$\\
+        \hline 0 & 0 & 0\\
+        \hline 0 & 1 & 1\\
+        \hline \cellcolor{grey!20}1 & \cellcolor{grey!20}0 & \cellcolor{grey!20}0\\
+        \hline 1 & 1 & 0\\
+        \hline
+    \end{tabular}
+    \begin{tip}
+        Когато имаме допълнителни условия (например от вида $B\subseteq C$), задраскваме редове, неотговарящи на условието.
+    \end{tip}
+    Ето защо в случая се абстрахираме от третия ред на таблицата, който не отговаря на условието (понеже в $B$ има елемент, който не е в $C$), и разглеждаме само останалите.\\
+    В оставащите редове се вижда, че за всеки елемент \(x\), $x\notin B\backslash C$ (навсякъде в последната колона има 0), тоест $B\backslash C=\varnothing.\quad\blacksquare$\\
+    \\\emph{2 н.)} Допсукаме противното - нека $B\backslash C\neq\varnothing$, т.е. \(\exists x\in B: x\notin C\). Тогава обаче $B\nsubseteq C \Rightarrow$ противоречие с условието.$\quad\blacksquare$\\
+    \\\emph{3 н.)} Спокойно може да се гледа на условието като на импликация, за която трябва да се докаже, че винаги е вярна (т.е. тавтология).\\$(B\subseteq C) \rightarrow (B\backslash C=\varnothing)\equiv\\ \forall x(x\in B\to x\in C)\to \neg\exists y (y\in B \wedge y\notin C)\equiv\\ \neg\forall x(x\notin B\vee x\in C)\vee\neg\exists y(y\in B \wedge y\notin C)\equiv\\ \exists x(x\in B\wedge x\notin C)\vee\neg\exists y(y\in B \wedge y\notin C)\equiv\\ \exists x(x\in B\wedge x\notin C)\vee\neg\exists x(x\in B \wedge x\notin C)\equiv T\quad\blacksquare$ 
+\end{sol}
+
+\hfill
+\begin{problem}
+    Намерете редица от множества \(\{A_i\}_{i\in\mathbb{N}}\) такава, че \(\forall i\in\mathbb{N}: A_i\subseteq A_{i+1}\), но \(\bigcap_{i\in\mathbb{N}}A_i=\varnothing\)
+\end{problem}
+\begin{sol}
+    това е сравнително тривиален пример от гледна точка на анализа: сечението на отворените интервали \((0,1), (0,\dfrac{1}{2}), ... (0,\dfrac{1}{n}), ...\) е именно празното множество (защо интервалите са множества?) \(\blacksquare\)
+\end{sol}
+
+\hfill
+\begin{problem}
+    Вярно ли е, че:
+    \begin{itemize}
+        \item ако \(C\subseteq A\cup B\), то \(C\subseteq A \vee C\subseteq B\)
+        \item ако \(C\subseteq A\cap B\), то \(C\subseteq A \wedge C\subseteq B\)
+        \item ако \(A\subseteq B\), то \(\mathcal{P}(A)\subseteq\mathcal{P}(B)\)
+        \item \(\mathcal{P}(A\cap B)=\mathcal{P}(A)\cap\mathcal{P}(B)\)
+        \item \(\mathcal{P}(A\cup B)=\mathcal{P}(A)\cup\mathcal{P}(B)\)
+    \end{itemize}
+\end{problem}
+\begin{sol}\hfill
+    \begin{itemize}
+        \item Невинаги е вярно, ето контрапример: \(A=\{1,2\}, B=\{3,4\}, C=\{1,3\}\) (обратната посока обаче винаги е вярна). \(\quad\blacksquare\)
+
+        \item За разлика от предното, това е винаги вярно. За прозиволен елемент \(x\in C:\;x\in C\subseteq (A\cap B) \subseteq A \Rightarrow x\in A\), значи \(\forall x\in C: x\in A \Rightarrow C\subseteq A\) аналогично и \(x\in C\subseteq (A\cap B) \subseteq B \Rightarrow x\in B\Rightarrow\forall x\in C: x\in B \Rightarrow C\subseteq B\). Получихме \((C\subseteq A) \wedge (C\subseteq B).\quad\blacksquare\)
+        
+        \item Да. Нека \(S\in\mathcal{P}(A)\) е произволно подмножество на \(A\), тогава \(S\subseteq A\subseteq B \Rightarrow S\in\mathcal{P}(B)\). Понеже \(S\) е произволно, то \(\mathcal{P}(A)\subseteq\mathcal{P}(B).\quad\blacksquare\)
+        
+        \item Ще докажем исканото на две части (като покажем, че ляата част се съдържа в дясната и обратно). Нека \(S\in\mathcal{P}(A\cap B) \Rightarrow S\subseteq A\cap B\Rightarrow (S\subseteq A) \wedge (S\subseteq B)\Rightarrow (S\in\mathcal{P}(A)) \wedge (S\in\mathcal{P}(B))\Rightarrow S\in(\mathcal{P}(A)\cap\mathcal{P}(B))\). Това показва, че всеки елемент от лявото множество е и в дясното, откъдето \(\mathcal{P}(A\cap B)\subseteq\mathcal{P}(A)\cap\mathcal{P}(B).\quad\square\)\\
+        Сега наобратно: нека \(S\in(\mathcal{P}(A)\cap\mathcal{P}(B)) \Rightarrow (S\in\mathcal{P}(A)) \wedge (S\in\mathcal{P}(B))\Rightarrow (S\subseteq A)\wedge (S\subseteq B)\Rightarrow S\subseteq A\cap B \Rightarrow S\in\mathcal{P}(A\cap B).\quad\blacksquare\)
+        
+        \item Не е винаги вярно, ето контрапример: \(A=\{1\}, B=\{2\}\), тогава \(\mathcal{P}(A\cup B)=\mathcal{P}(\{1,2\})=\{\varnothing, \{1\}, \{2\}, \{1,2\}\}\), докато \(\mathcal{P}(A)\cup\mathcal{P}(B)=\{\varnothing, \{1\},\{2\}\}.\quad\blacksquare\)
+    \end{itemize}
+\end{sol}
+
+\hfill
+\begin{problem}
+    Нека \(F\) е фамилия от \(n\) различни подмножества на множество \(A\), \(n\geq 2\). Докажете, че съществуват поне \(n\) различни множества от вида \(A\triangle B,\;A,B\in F\) (\(A\triangle B\) е симетричната разлика на множествата).
+\end{problem}
+\begin{sol}
+    Достатъчно е да направим наблюдението, че \(A\triangle B \neq A\triangle C\) тстк \(B\neq C\) (достатъчна ни е само обратната посока).\\ 
+    \textbf{Лема:} Ако $B\neq C$, то $A\triangle B \neq A\triangle C$\\
+    \textbf{Д-во на лемата:} допускаме противното, че $B\neq C$, но $A\triangle B = A\triangle C=S$. От $B\neq C$, б.о.о $\exists x_0: x_0\in B\wedge x_0\notin C$ (съответно може и наобратно). Сега имаме:
+    \begin{itemize}
+        \item От една страна $x_0\in S=A\triangle B$ тстк $x_0\notin A$ (защото вече занем, че $x_0\in B$)
+        \item От друга страна $x_0\in S=A\triangle C$ тстк $x_0\in A$ (защото вече занем, че $x_0\notin C$)
+    \end{itemize}
+    Но тогава $x_0\notin A \Leftrightarrow x_0\in A$, абсурдно, противоречие с допускането. $\square$\\
+    \\Ако \(A_1,...,A_n\) са множествата от фамилията, то \(A_1\triangle A_1, A_1\triangle A_2, ...,A_1\triangle A_n\) според лемата са именно \(n\) различни множества от искания вид.\(\quad\blacksquare\)
+\end{sol}
+
+\hfill
+\begin{problem}[*]
+    Нека \(F=\{A_1,\;A_2\;...\;A_k\}\) е фамилия от различни подмножества на A, като \(|A|=n\). Ако всеки две множества от \(F\) се пресичат, докажете, че \(k\leq 2^{n-1}\).
+\end{problem}
+\begin{sol}
+    Да групираме всички възможни подмножества на \(A\) (общо $2^{n-1}$) по двойки, като всяко да бъде в двойка с допълнението си до \(A\), т.е. произволно подмножество $S$ е в двойка с \(A\backslash S\). Това са $2^{n-1}$ двойки.\\Ако $k>2^{n-1}$, то от принципа на Дирихле (който официално ще вземем след 3 занятия) измежду множествата от фамилията ще има поне две, които са част от една двойка (напр. $A_i$ и $A_j, i\neq j$). Но тогава те не се пресичат, противоречие с допускането, значи $k\leq 2^{n-1}.\quad\blacksquare$
+\end{sol}
+
+
+\hfill
+\begin{definition}[фамилия]
+    Множество от множества наричаме фамилия.
+    \begin{remark}
+        Формално в аксиоматичната система ZF протоелементи (прости единици, които изграждат множества) няма, там всички обекти са множества, така че случай, различен от горния, там е невъзможен. Ние обаче считаме, че такива най-прости съставни елементи съществуват.
+    \end{remark}
+\end{definition}
+
+\begin{definition}[покритие, разбиване]
+    Фамилия от множества $F={X_1,...,X_k}$ наричаме \emph{покриване} на непразното множество $A$, ако са изпълнени:
+    \begin{enumerate}
+        \item $\forall i: X_i\subseteq A$ /опционално, следва от 3/,
+        \item $\forall i:X_i\neq\varnothing$,
+        \item $\bigcup_{i=1}^k X_i=A$;
+    \end{enumerate}
+    \item Ако освен това е изпълнено: $\forall i\forall j, i\neq j: X_i\cap X_j=\varnothing$, то поркиването се нарича \emph{разбиване}.
+\end{definition}
+
+\hfill
+\begin{problem}
+    Ако $A$ е множество от множества, докажете, че $A\subseteq\mathcal{P} (\bigcup A)$ (с $\bigcup A$ онзачаваме $\bigcup_{a\in A} a$). 
+\end{problem}
+\begin{sol}
+    Трябва да покажем, че ако $x\in LHS$, то $x\in RHS$. Нека $x\in A$, значи $\bigcup_{a\in A} a= a_1...\cup x\cup... \cup a_n$, откъдето $x\subseteq\bigcup A$ (понеже за произволни множества $V\subseteq V\cup W$). От $x\subseteq\bigcup A$ директно следва, че $x\in\mathcal{P}(\bigcup A)$.$\quad\blacksquare$
+\end{sol}
+
+\hfill
+\begin{problem}[ДР1 И 23]
+    Нека А е множество, а P, R са произволни негови разбивания. Да се докаже, че множеството \(F=\{X\cap Y| X\in P\wedge Y\in R\}\backslash\{\varnothing\}\) също е разбиване на А.\\
+    \\\emph{*Въпрос: защо ''$\varnothing$'' е във фигурни скоби?}
+\end{problem}
+\begin{sol}
+    Последователно проверяваме по дефиницията.
+    Понеже \(X,Y\) са множества, то сечението им е множество, така че \(F\) наистина е фамилия от множества (за определеност нека $F=\{F_1,...,F_k\}$). При това:\\
+    - \(X,Y\) са елементи от разбиванията \(P,R\) на $A$, така че сеченията им \(F_i\) са подмножества на A.$\quad\checkmark$\\
+    \\- Понеже \emph{елементът} празно множество е премахнат от фамилията (''$\backslash\{\varnothing\}$''), то всеки елемент $F_i\neq\varnothing.\quad\checkmark$\\
+    \\- Сега да покажем, че $\bigcup_{i=1}^k F_i=A$. Разглеждаме конкретен елемент $a\in A$. Понеже $P, R$ са разбивания на $A$, то съществуват множества $X_0\in P$ и $Y_0\in R: a\in X_0 \wedge a\in Y_0\Rightarrow a\in X_0\cap Y_0=F_0 \Rightarrow a\in\bigcup_{i=1}^k F_i$. С това заключаваме, че всеки елемент от \(A\) е ''покрит''.$\quad\checkmark$\\
+    \\- Остава да проверим дали $\forall i\forall j, i\neq j: F_i\cap F_j=\varnothing$. По дефиниция $F_t=X\cap Y, (X\in P)\wedge (Y\in R)$, съответно нека  $F_i=X_1\cap Y_1,\;F_j=X_2\cap Y_2$, където $(X_1,X_2\in P)\wedge (Y_1,Y_2\in R)$. Понеже \(F_i\neq F_j\), то $(X_1\neq X_2)\vee (Y_1\neq Y_2)$. Б.о.о. е  изпълнено първото, \(X_1\neq X_2\), нещо повече, тъй като те са част от разбиване, то те не се пресичат, $X_1\cap X_2=\varnothing$, но тогава и сечението $F_i\cap F_j = (X_1\cap Y_1)\cap(X_2\cap Y_2)=X_1\cap X_2\cap Y_1\cap Y_2 = \varnothing\cap Y_1\cap Y_2=\varnothing.\quad\checkmark$\\
+    \\Всички изисквания от дефиницията са изпълнени, значи даденото множество наистина е разбиване.$\quad\blacksquare$
+\end{sol}
+
+\begin{problem}[*]
+    Нека $F=\{A_1,A_2,...,A_n\}$ е фамилия от $r$-елементни множества. Ако сечението на всеки $r+1$ множества от $F$ е непразно, да се докаже, че и сечението на всички $n$ множества от $F$ е непразно.
+\end{problem}
+\begin{sol}
+    Последователно (по индукция) ще докажем, че сечението на всеки $k$ от множествата е непразно, където $k>r$.\\
+    \textbf{База:} зa $k=r+1$ сечението на всеки $r+1$ множества е непразно по условие. \(\checkmark\)\\
+    \textbf{И.П:} Нека сечението на всеки $k,\;r<k<n$ множества е непразно.\\
+    \textbf{И.С:} Нека $B_1, B_2, ... B_{k+1}$ са произволни множества от фамилията, искаме да докажем, че тяхното сечение също е непразно. Допускаме противното, нека $\bigcap_{i=1}^{k+1}B_i=\varnothing$. От И.П.:\\
+    $B_2\cap B_3\cap...\cap B_{k}\cap B_{k+1}=C_1\neq\varnothing$\\
+    $B_1\cap B_3\cap...\cap B_{k}\cap B_{k+1}=C_2\neq\varnothing$\\
+    $\cdots$\\
+    $B_1\cap B_2\cap...\cap B_{k-1}\cap B_{k+1}=C_k\neq\varnothing$\\
+    Тоест във всякo $C_t$ има елемент от $B_{k+1}$. Но последното множество е $r$-елементно и $k>r$. Тогава от принципа на Дирихле съществуват индекси $i,j;\;0<i\neq j\leq k$ такива, че множествата \(C_i, C_j\) имат общ елемент с $B_{k+1} \Rightarrow C_i\cap C_j\neq\varnothing$ откъдето $B_1\cap....\cap B_{k+1}=[B_1... B_{i-1}\cap B_{i+1}... B_{k+1}]\cap[B_1... B_{j-1}\cap B_{j+1} ...  B_{k+1}]=C_i\cap C_j\neq\varnothing$, с което индукционната стъпка е завършена. \(\checkmark\)\\
+    \\От индукцията директно следва, че сечението на всички \(n\) множества е непразно.$\quad\blacksquare$
+\end{sol}
+
+\hfill
+\subsection*{Задачи за вкъщи/в общежитието}
+\begin{flushleft}
+    \textbf{Задача 1.} Да се докаже, че $A=B \Leftrightarrow \mathcal{P}(A)=\mathcal{P}(B)$.\\
+\end{flushleft}
+
+\begin{flushleft}
+    \textbf{Задача 2.} Да се докаже, че $(A\cap B)\times(C\cap D)=(A\times C)\cap(B\times D)$.\\
+\end{flushleft}
+
+%\hfill
+%\begin{problem}[Семестриално КН 16]
+ %   Ако $A,B, C$ са множества, за които е в сила следната система, да се намери неизвестното множество $X$ (изразено чрез $A, B, C$):
+  %  \[\begin{array}{|l}
+   %     C\cup X=(B\backslash A)\cup C
+    %    \\C\cap X=(B\cup A)\cap C
+    %\end{array} \]
+%\end{problem}
+%\begin{sol}
+  %  Искаме точна стойност за $X$, нека ограничим отгоре и отдолу:\\
+   % Какво ни дава първото равенство:
+    %\begin{itemize}
+     %   \item $C\cup X=(B\backslash A)\cup C\Rightarrow X\subseteq (B\backslash A)\cup C$
+      %  \item $C\cup X=(B\backslash A)\cup C\Rightarrow (C\cup X)\cap \overline{C}=((B\backslash A)\cup C)\cap\overline{C} \Rightarrow X\cap\overline{C}=(B\backslash A)\cap\overline{C}\Rightarrow (B\backslash A)\cap\overline{C}\subseteq X$
+    %\end{itemize}
+    %Какво ни дава второто равенство:
+    %\begin{itemize}
+     %   \item $C\cap X=(B\cup A)\cap C\Rightarrow (B\cup A)\cap C\subseteq X$
+        %\item $C\cap X=(B\cup A)\cap C\Rightarrow (C\cap X)\cup\overline{C}=((B\cup A)\cap C)\cup\overline{C}\Rightarrow X\cup\overline{C}=(B\cup A)\cup\overline{C}\Rightarrow X\subseteq (B\cup A)\cup\overline{C}$
+    %\end{itemize}
+    %От първия и четвъртия извод следва, че $X$ е подмножество и на сечението им: $X\subseteq [(B\backslash A)\cup C]\cap[(B\cup A)\cup\overline{C}]=$\\
+    %От втория и третия извод следва, че $X$ е съдържа и обединението им: $[(B\backslash A)\cap\overline{C}]\cup[(B\cup A)\cap C]=[(B\backslash A)\cup C]\cap[(B\backslash A)\cup(B\cup A)]\cap[\overline{C}\cup(B\cup A)]\cap[\overline{C}\cup C]=[(B\backslash A)\cup C]\cap[(B\cup A)\cup\overline{C}]\cap[(B\backslash A)\cup(B\cup A)]$
+%\end{sol}
+
+\begin{flushleft}
+    \textbf{Задача 3.} (*предложи М. Георгиев) Да се докаже, че за множество $A$: $\bigcup A\subseteq A$ тстк $A\subseteq\mathcal{P}(A)$.
+    /Множество, изпълняващо горните свойства, се нарича \emph{транзитивно}.\\
+\end{flushleft}
+\end{document}
