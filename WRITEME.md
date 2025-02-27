@@ -1,14 +1,14 @@
 # 1. Логика
 
 **съждителна:** 7, 15 от файла
-*зад4. от [ttps://learn.fmi.uni-sofia.bg/pluginfile.php/528491/mod_resource/content/1/midterm-DS-fall-2024--part-2.pdf](https://learn.fmi.uni-sofia.bg/pluginfile.php/528491/mod_resource/content/1/midterm-DS-fall-2024--part-2.pdf)
+*зад4. от [ttps://learn.fmi.uni-sofia.bg/pluginfile.php/528491/mod_resource/content/1/midterm-DS-fall-2024--part-2.pdf](https://learn.fmi.uni-sofia.bg/pluginfile.php/528491/mod_resource/content/1/midterm-DS-fall-2024--part-2.pdf)\\
 **предикатна:** 9 г), 16, 17 от файла
 
 
 # 2. Множества
 
-**общи задачи:** зад. 10, 13, 1 (от края на файла), 2 (от края на файла), 3
-**задачи от екстремална теория на множествата (по-забавни):** *15 от файла, *Лема на *Sperner*, *Erdos-Ko-Rado theorem*, 
+**общи задачи:** зад. 10, 13, 1 (от края на файла), 2 (от края на файла), 3 (пак там)\\
+**задачи от екстремална теория на множествата (по-забавни):** *15 от файла, както и следните 3:
 
 ![](https://33333.cdn.cke-cs.com/kSW7V9NHUXugvhoQeFaf/images/c326f5aa288da231b949bda746be6c1c45a570cce45e8fb5.jpg)
 
