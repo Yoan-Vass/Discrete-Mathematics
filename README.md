@@ -1,6 +1,6 @@
 # Discrete Mathematics Resources
 
-Welcome! This repository contains curated resources, problem sets, solutions and learning materials for **Discrete Mathematics**, aimed at supporting university-level students. These are designed to complement formal instruction in _Discrete Structures_ for Computer Science students at _Sofia Univeristy_
+Welcome! This repository contains curated resources, problem sets, solutions and learning materials for **Discrete Mathematics**, aimed at supporting university-level students. These are designed to complement formal instruction in _Discrete Structures_ for Computer Science and Informatics students at _Sofia Univeristy_
 
 ---
 
