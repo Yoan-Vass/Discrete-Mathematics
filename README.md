@@ -29,3 +29,10 @@ This repository is intended to:
 - **Students**: Looking to deepen their understanding of discrete math.
 - **TAs & Instructors**: Searching for adaptable resources to support teaching.
 - **Self-learners**: Exploring discrete mathematics on your own.
+
+## 📚 Resources
+
+- https://dgrozev.wordpress.com/wp-content/uploads/2022/08/olympiad_graph_theory.pdf
+- https://web.mit.edu/yufeiz/www/imo2008/tang-graph.pdf
+- https://sms.math.nus.edu.sg/simo/training2003/smograph.pdf
+- https://daiwz.net/course/disc_math/2023/West_Intro_Graph_Theory_en.pdf
