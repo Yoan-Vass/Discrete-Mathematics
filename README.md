@@ -35,4 +35,5 @@ This repository is intended to:
 - https://dgrozev.wordpress.com/wp-content/uploads/2022/08/olympiad_graph_theory.pdf
 - https://web.mit.edu/yufeiz/www/imo2008/tang-graph.pdf
 - https://sms.math.nus.edu.sg/simo/training2003/smograph.pdf
+- https://sunainapati.github.io/2024/12/08/Some-problems-in-Olympiad-Graph-theory.html
 - https://daiwz.net/course/disc_math/2023/West_Intro_Graph_Theory_en.pdf
